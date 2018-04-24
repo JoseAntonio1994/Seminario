@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Seminario</string>
+
+    <string-array name="maestria">
+        <item>Protocolo</item>
+        <item>Culminación</item>
+    </string-array>
+
+    <string-array name="doctorado">
+        <item>Protocolo</item>
+        <item>Avance</item>
+        <item>Culminación</item>
+    </string-array>
+</resources>
