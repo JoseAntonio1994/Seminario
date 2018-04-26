@@ -40,6 +40,9 @@ public class SeccionActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
 
+                    toolbar.setTitle("Resultados obtenidos");
+                    fragmentSelected = new ResultFragment();
+
                     return true;
             }
 
