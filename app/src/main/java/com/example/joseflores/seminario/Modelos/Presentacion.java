@@ -4,15 +4,15 @@ package com.example.joseflores.seminario.Modelos;
  * Created by JoseFlores on 24/04/2018.
  */
 
-public class FondoPresentacion {
+public class Presentacion {
 
     private String idFondo;
     private String nombreFondo;
     private String puntaje;
 
-    public FondoPresentacion(){}
+    public Presentacion(){}
 
-    public FondoPresentacion(String idFondo, String nombreFondo, String puntaje) {
+    public Presentacion(String idFondo, String nombreFondo, String puntaje) {
         this.idFondo = idFondo;
         this.nombreFondo = nombreFondo;
         this.puntaje = puntaje;
