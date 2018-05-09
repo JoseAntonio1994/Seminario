@@ -15,9 +15,6 @@ public class SeccionActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private Toolbar toolbar;
 
-    private Fragment fragmentSelected = null;
-    private FragmentTransaction transaction;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -25,28 +22,31 @@ public class SeccionActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+            Fragment fragmentSelected = null;
+
             switch (item.getItemId()) {
                 case R.id.navigation_home:
 
                     toolbar.setTitle("Fondo de presentación");
                     fragmentSelected = new FondoFragment();
 
-                    return true;
+                    break;
                 case R.id.navigation_dashboard:
 
                     toolbar.setTitle("Estilo de presentación");
                     fragmentSelected = new EstiloFragment();
 
-                    return true;
+                    break;
                 case R.id.navigation_notifications:
 
                     toolbar.setTitle("Resultados obtenidos");
                     fragmentSelected = new ResultFragment();
 
-                    return true;
+                    break;
             }
 
-            transaction = getSupportFragmentManager().beginTransaction();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_container, fragmentSelected).commit();
 
             return true;
@@ -68,7 +68,7 @@ public class SeccionActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, new FondoFragment()).commit();
 
     }

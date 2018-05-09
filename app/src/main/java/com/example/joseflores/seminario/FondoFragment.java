@@ -82,7 +82,7 @@ public class FondoFragment extends Fragment {
 
         String key = mReference.push().getKey();
 
-        Presentacion fondo = new Presentacion(key, "Gramatica", "0");
+        Presentacion fondo = new Presentacion(key, "Gramatica", 0);
 
         mReference.child(key).setValue(fondo);
 
@@ -133,7 +133,7 @@ public class FondoFragment extends Fragment {
 
                 holder.nomFondo.setText(model.getNombreFondo());
 
-                holder.puntaje.setText(model.getPuntaje());
+                holder.puntaje.setText(String.valueOf(model.getPuntaje()));
 
                 holder.btnAdd.setOnClickListener(new View.OnClickListener() {
                     @Override

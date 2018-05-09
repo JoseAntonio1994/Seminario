@@ -7,4 +7,5 @@ package com.example.joseflores.seminario.Modelos;
 public class Nodos {
 
     public final static String FONDO = "fondo";
+    public final static String ESTILO = "estilo";
 }

@@ -8,11 +8,11 @@ public class Presentacion {
 
     private String idFondo;
     private String nombreFondo;
-    private String puntaje;
+    private int puntaje;
 
     public Presentacion(){}
 
-    public Presentacion(String idFondo, String nombreFondo, String puntaje) {
+    public Presentacion(String idFondo, String nombreFondo, int puntaje) {
         this.idFondo = idFondo;
         this.nombreFondo = nombreFondo;
         this.puntaje = puntaje;
@@ -34,11 +34,11 @@ public class Presentacion {
         this.nombreFondo = nombreFondo;
     }
 
-    public String getPuntaje() {
+    public int getPuntaje() {
         return puntaje;
     }
 
-    public void setPuntaje(String puntaje) {
+    public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
 }
