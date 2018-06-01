@@ -7,4 +7,9 @@
         android:icon="@drawable/ic_add"
         android:title="Add"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_eye"
+        android:icon="@drawable/ic_eye"
+        android:title="Vista"
+        app:showAsAction="ifRoom" />
 </menu>

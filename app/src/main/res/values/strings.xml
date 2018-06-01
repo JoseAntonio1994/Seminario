@@ -11,6 +11,37 @@
         <item>Avance</item>
         <item>Culminación</item>
     </string-array>
+
+    <string-array name="puntaje_fondo">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="puntaje_estilo">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <!--Array con los valores de la cabecera de la tabla-->
+    <string-array name="cabecera_tabla">
+        <item>Fondo de la presentación</item>
+        <item>Calificación Máxima</item>
+        <item>Calificación Otorgada</item>
+    </string-array>
+
     <string name="title_activity_seccion">SeccionActivity</string>
     <string name="title_home">Fondo</string>
     <string name="title_dashboard">Estilo</string>

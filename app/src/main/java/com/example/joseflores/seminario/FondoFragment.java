@@ -1,10 +1,12 @@
 package com.example.joseflores.seminario;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,8 +22,12 @@ import com.example.joseflores.seminario.Modelos.Presentacion;
 import com.example.joseflores.seminario.Modelos.Nodos;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 
 /**
@@ -92,7 +98,7 @@ public class FondoFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
     }
 
     @Override
@@ -133,12 +139,13 @@ public class FondoFragment extends Fragment {
 
                 holder.nomFondo.setText(model.getNombreFondo());
 
-                holder.puntaje.setText(String.valueOf(model.getPuntaje()));
+                holder.setPuntaje(model.getPuntaje());
 
                 holder.btnAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.setPuntaje(model.getIdFondo());
+                        //holder.setPuntaje(model.getIdFondo());
+                        asignarPuntaje(model.getIdFondo());
                     }
                 });
 
@@ -148,11 +155,66 @@ public class FondoFragment extends Fragment {
             @Override
             public FondoAdapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fondo_item, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
 
                 return new FondoAdapter(view);
             }
         };
+
+    }
+
+    private void asignarPuntaje(final String idFondo) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+
+        dialog.setTitle("Asignar puntos")
+                .setSingleChoiceItems(R.array.puntaje_fondo, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int selected = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+
+                        actualizarPuntaje(idFondo, selected);
+
+                    }
+                })
+
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                })
+                .show();
+
+    }
+
+    private void actualizarPuntaje(String idFondo, final int puntaje) {
+
+        mReference.child(idFondo).child(Nodos.PUNTAJE)
+                .runTransaction(new Transaction.Handler() {
+                    @Override
+                    public Transaction.Result doTransaction(MutableData mutableData) {
+
+                        mutableData.setValue(puntaje);
+
+
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+
+
+                    }
+                });
 
     }
 
@@ -176,7 +238,9 @@ public class FondoFragment extends Fragment {
             mReferences = FirebaseDatabase.getInstance().getReference().child(Nodos.FONDO);
         }
 
-        public void setPuntaje(String idFondo){
+        public void setPuntaje(int puntajeAsignado){
+
+            puntaje.setText(String.valueOf(puntajeAsignado));
 
         }
     }

@@ -1,16 +1,15 @@
 package com.example.joseflores.seminario;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,8 +19,12 @@ import com.example.joseflores.seminario.Modelos.Nodos;
 import com.example.joseflores.seminario.Modelos.Presentacion;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 
 /**
@@ -54,16 +57,10 @@ public class EstiloFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_add, menu);
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
 
     }
 
@@ -98,26 +95,6 @@ public class EstiloFragment extends Fragment {
     }
 
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-
-            case R.id.menu_add:
-
-                newItem();
-
-                break;
-
-            default:
-                return super.onOptionsItemSelected(item);
-
-        }
-
-        return true;
-    }
-
     private void newItem() {
 
         String key = mReference.push().getKey();
@@ -136,12 +113,13 @@ public class EstiloFragment extends Fragment {
 
                 holder.nomFondo.setText(model.getNombreFondo());
 
-                holder.puntaje.setText(String.valueOf(model.getPuntaje()));
+                holder.setPuntaje(model.getPuntaje());
 
                 holder.btnAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        holder.setPuntaje(model.getIdFondo());
+
+                        asignarPuntaje(model.getIdFondo());
                     }
                 });
 
@@ -151,11 +129,61 @@ public class EstiloFragment extends Fragment {
             @Override
             public EstiloAdapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_fondo_item, parent, false);
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
 
                 return new EstiloAdapter(view);
             }
         };
+
+    }
+
+    private void asignarPuntaje(final String idEstilo) {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+
+        dialog.setTitle("Asignar puntos")
+                .setSingleChoiceItems(R.array.puntaje_estilo, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int selected = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+
+                        actualizarPuntaje(idEstilo, selected);
+                    }
+                })
+
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .show();
+
+    }
+
+    private void actualizarPuntaje(String idEstilo, final int selected) {
+
+        mReference.child(idEstilo).child(Nodos.PUNTAJE)
+                .runTransaction(new Transaction.Handler() {
+                    @Override
+                    public Transaction.Result doTransaction(MutableData mutableData) {
+
+                        mutableData.setValue(selected);
+
+                        return Transaction.success(mutableData);
+                    }
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+
+                    }
+                });
 
     }
 
@@ -178,7 +206,9 @@ public class EstiloFragment extends Fragment {
             mReferences = FirebaseDatabase.getInstance().getReference().child(Nodos.ESTILO);
         }
 
-        public void setPuntaje(String idFondo){
+        public void setPuntaje(int puntajeAsignado){
+
+            puntaje.setText(String.valueOf(puntajeAsignado));
 
         }
     }
