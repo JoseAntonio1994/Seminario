@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class SeccionActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+
     private Toolbar toolbar;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -89,8 +89,6 @@ public class SeccionActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
 
-            case R.id.menu_add: crearPonderacion().show();  break;
-
             case R.id.menu_eye: mostrarExpositor().show(); break;
 
             default: return super.onOptionsItemSelected(item);
@@ -100,33 +98,6 @@ public class SeccionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public AlertDialog crearPonderacion(){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = this.getLayoutInflater();
-
-        View view = inflater.inflate(R.layout.new_item, null);
-
-        builder.setView(view)
-
-                .setPositiveButton("Crear", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-        return builder.show();
-
-    }
 
     public AlertDialog mostrarExpositor(){
 

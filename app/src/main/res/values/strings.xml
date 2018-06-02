@@ -43,10 +43,11 @@
     </string-array>
 
     <string name="title_activity_seccion">SeccionActivity</string>
-    <string name="title_home">Fondo</string>
+    <string name="title_fondo">Fondo</string>
     <string name="title_dashboard">Estilo</string>
     <string name="title_notifications">Resultados</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Resultados</string>
+    <string name="title_activity_consulta_ponderacion">ConsultaPonderacion</string>
 </resources>

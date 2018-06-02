@@ -39,8 +39,8 @@ public class DDL {
     public static final String TOTAL_ESTILO = "totalEstilo";
     public static final String TOTAL_PUNTOS = "totalPuntos";
 
-    public static final String CREAR_TABLA_PUNTAJE = "CREATE TABLE " + TABLA_PUNTAJE + " ( " + TOTAL_PRE + " INTEGER, " + TOTAL_ESTILO + " INTEGER, "
-            + PUN_ESTILO + " INTEGER )";
+    public static final String CREAR_TABLA_PUNTAJE = "CREATE TABLE " + TABLA_PUNTAJE + " ( " + ID_EXPOSITOR + " INTEGER, " + TOTAL_PRE + " INTEGER, " + TOTAL_ESTILO + " INTEGER, "
+            + TOTAL_PUNTOS + " INTEGER )";
 
 
 }

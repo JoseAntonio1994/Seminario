@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
@@ -16,11 +16,5 @@
         android:title="@string/title_dashboard"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/navigation_notifications"
-        android:enabled="true"
-        android:icon="@drawable/ic_consultar"
-        android:title="@string/title_notifications"
-        app:showAsAction="ifRoom" />
 
 </menu>

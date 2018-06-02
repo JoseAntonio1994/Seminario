@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".NuevoExpositor" />
+        <activity
+            android:name=".SeccionActivity"
+            android:label="@string/title_activity_seccion" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,9 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ConsultaExpositor" />
+        <activity android:name=".DetalleExpositor" />
+        <activity android:name=".NuevaPonderacion" />
         <activity
-            android:name=".SeccionActivity"
-            android:label="@string/title_activity_seccion"></activity>
+            android:name=".ConsultaPonderacion"
+            android:label="@string/title_activity_consulta_ponderacion"></activity>
     </application>
 
 </manifest>
